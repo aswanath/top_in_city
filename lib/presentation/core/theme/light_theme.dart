@@ -4,6 +4,7 @@ import 'package:top_in_city/core/constants.dart';
 
 final lightTheme = ThemeData(
   // fontFamily: josefinSans,
+  scaffoldBackgroundColor: Colors.white,
   primarySwatch: Colors.grey,
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
@@ -14,16 +15,53 @@ final lightTheme = ThemeData(
       ),
     ),
   ),
-  textTheme: TextTheme(
-    headlineLarge: TextStyle(
-      fontFamily: chilanka,
-      fontSize: 32,
-      foreground: Paint()..shader = linearGradient,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(Colors.black),
+      padding: MaterialStateProperty.all(
+        const EdgeInsets.all(20),
+      ),
     ),
-    titleLarge: TextStyle(
+  ),
+  textTheme: TextTheme(
+    headlineLarge: const TextStyle(
       fontFamily: chilanka,
-      fontSize: 20,
-      foreground: Paint()..shader = linearGradient,
+      fontSize: 26,
+    ),
+    headlineMedium: const TextStyle(
+      fontFamily: josefinSans,
+      fontWeight: FontWeight.w700,
+      color: Colors.black,
+      fontSize: 22,
+    ),
+    titleLarge: const TextStyle(
+      fontFamily: chilanka,
+      fontSize: 17,
+    ),
+    titleMedium: const TextStyle(
+      fontFamily: josefinSans,
+      fontWeight: FontWeight.w600,
+      fontSize: 18,
+    ),
+    bodyMedium: const TextStyle(
+      fontFamily: josefinSans,
+      fontWeight: FontWeight.w500,
+      fontSize: 18,
+    ),
+    bodySmall: TextStyle(
+      fontFamily: josefinSans,
+      fontSize: 9,
+      height: 1.5,
+      color: Colors.black.withOpacity(.6),
+    ),
+    titleSmall: const TextStyle(
+      fontSize: 12,
+    ),
+    bodyLarge: const TextStyle(
+      fontFamily: josefinSans,
+      fontWeight: FontWeight.w400,
+      color: Colors.white,
+      fontSize: 14,
     ),
   ),
 );
