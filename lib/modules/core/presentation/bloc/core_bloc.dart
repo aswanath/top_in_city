@@ -33,11 +33,20 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
     );
   }
 
-  FutureOr<void> _onContactScreenTapped(event, emit) => emit(NavigateToContactScreen());
+  FutureOr<void> _onContactScreenTapped(event, emit) {
+    emit(LoadingState(isLoading: true));
+    emit(NavigateToContactScreen());
+    emit(LoadingState(isLoading: false));
+  }
 
-  FutureOr<void> _onHomeScreenTapped(event, emit) => emit(NavigateToHomeScreen());
+  FutureOr<void> _onHomeScreenTapped(event, emit) {
+    emit(LoadingState(isLoading: true));
+    emit(NavigateToHomeScreen());
+    emit(LoadingState(isLoading: false));
+  }
 
   FutureOr<void> _onInitializeApi(event, emit) async {
+    emit(LoadingState(isLoading: true));
     await GoogleSheetsFormApi.init();
     await GoogleSheetsMenuApi.init();
     menuList = GoogleSheetsMenuApi.menuList;
@@ -46,9 +55,11 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
         menuList: menuList,
       ),
     );
+    emit(LoadingState(isLoading: false));
   }
 
   FutureOr<void> _onMenuTapped(MenuTapped event, emit) async {
+    emit(LoadingState(isLoading: true));
     var menu = await GoogleSheetsMenuApi.getWorkSheet(title: event.menuTitle);
     var menuRows = await menu?.values.allRows();
     emit(
@@ -57,5 +68,6 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
         menuRows: menuRows,
       ),
     );
+    emit(LoadingState(isLoading: false));
   }
 }

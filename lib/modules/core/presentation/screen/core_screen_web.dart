@@ -6,6 +6,7 @@ import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/core/constants.dart';
 import 'package:top_in_city/modules/contact/presentation/screen/contact_screen_web.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
+import 'package:top_in_city/modules/core/widgets/custom_progress_bar.dart';
 import 'package:top_in_city/modules/core/widgets/drop_down_widget.dart';
 import 'package:top_in_city/modules/core/widgets/footer_widget.dart';
 import 'package:top_in_city/modules/home/presentation/screen/home_screen_web.dart';
@@ -57,6 +58,12 @@ class _CoreScreenWebState extends State<CoreScreenWeb> {
             );
           } else if (state is FetchedAllMenus) {
             menuList = state.menuList;
+          } else if (state is LoadingState) {
+            if (state.isLoading) {
+              CustomProgressBar(context).showLoadingIndicator();
+            } else {
+              CustomProgressBar(context).hideLoadingIndicator();
+            }
           }
         },
         builder: (context, state) {

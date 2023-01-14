@@ -32,3 +32,9 @@ class ChangedLanguage extends CoreState {
 
   ChangedLanguage({required this.isMalayalam});
 }
+
+class LoadingState extends CoreState {
+  final bool isLoading;
+
+  LoadingState({this.isLoading = false});
+}
