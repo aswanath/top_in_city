@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:top_in_city/core/network/google_sheets_api.dart';
-import 'package:top_in_city/presentation/booking/helpers/validator_mixin.dart';
+import 'package:top_in_city/modules/contact/helpers/validator_mixin.dart';
+import 'package:top_in_city/modules/contact/model/user_field_model.dart';
+import 'package:top_in_city/modules/contact/network/google_sheets_form_api.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreenWeb extends StatefulWidget {
@@ -47,6 +49,7 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
           padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 children: [
@@ -184,7 +187,7 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
                                 UserFields.phone: phoneController.text,
                                 UserFields.message: messageController.text,
                               };
-                              var result = await GoogleSheetsApi.createField(form);
+                              var result = await GoogleSheetsFormApi.createField(form);
                               if (result) {
                                 nameController.clear();
                                 emailController.clear();
@@ -219,6 +222,9 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 40,
         ),
       ],
     );

@@ -1,13 +1,6 @@
 import 'package:gsheets/gsheets.dart';
 
-class UserFields {
-  static const name = 'Name';
-  static const email = 'Email';
-  static const phone = 'Phone';
-  static const message = 'Message';
-}
-
-class GoogleSheetsApi {
+class GoogleSheetsFormApi {
   static const _spreadSheetId = "1txNu0Z4pqaWnNvTLUE2sBSuWWd5aQk4gG9l6pu8GD-g";
   static const _credentials = r'''
   {
@@ -44,8 +37,6 @@ class GoogleSheetsApi {
 
   static Future<bool> createField(Map<String, dynamic> rowMap) async {
     if (_worksheet == null) return false;
-
-    print(rowMap);
     return await _worksheet!.values.map.appendRow(rowMap);
   }
 }

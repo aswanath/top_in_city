@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:top_in_city/presentation/core/model/menu_model.dart';
+import 'package:top_in_city/modules/core/model/menu_model.dart';
 
 ///list of Colors for gradient of text.
 const gradientColors = [
   Color(0xffA6A021),
   Color(0xffFF0303),
 ];
-const List<String> footerLinks = [
+List<String> footerLinks = [
   'HOME',
-  'SERVICES',
-  'CATERING MENU',
   'CONTACT',
-  'BOOKING',
 ];
 const String sadhyaPackages = 'Sadhya Packages ( Veg )';
 const String nonVegFoodMenu = 'Non-Veg Food Menu';

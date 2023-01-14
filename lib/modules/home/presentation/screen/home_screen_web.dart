@@ -1,8 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:top_in_city/core/asset_constants.dart';
-import 'package:top_in_city/presentation/core/widgets/footer_widget.dart';
-import 'package:top_in_city/presentation/core/widgets/service_card_widget.dart';
+import 'package:top_in_city/modules/core/widgets/service_card_widget.dart';
 
 class HomeScreenWeb extends StatefulWidget {
   const HomeScreenWeb({
@@ -17,7 +16,6 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // primary: false,
       children: [
         Align(
           child: ClipRRect(
@@ -83,7 +81,7 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
         const SizedBox(
           height: 50,
         ),
-        const Footer(),
+        // const Footer(),
       ],
     );
   }
