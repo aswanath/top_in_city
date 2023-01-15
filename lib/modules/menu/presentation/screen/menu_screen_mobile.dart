@@ -126,6 +126,8 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                                     isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
                                     style: Theme.of(context).textTheme.headlineMedium,
                                     maxLines: 1,
+                                    minFontSize: 6,
+                                    wrapWords: false,
                                   ),
                                 ),
                           SizedBox(
