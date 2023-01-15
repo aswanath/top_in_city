@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:top_in_city/core/helpers/email_helper.dart';
 import 'package:top_in_city/modules/contact/helpers/validator_mixin.dart';
 import 'package:top_in_city/modules/contact/model/user_field_model.dart';
@@ -72,19 +73,25 @@ class _ContactScreenMobileState extends State<ContactScreenMobile> with Validato
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "TOP IN CITY",
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
+                    TextRenderer(
+                      text: 'TOP IN CITY catering services',
+                      child: Text(
+                        "TOP IN CITY",
+                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      "Near moyans school,\nPalakkad, Kerala",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
+                    TextRenderer(
+                      text: "Near moyans school,\nPalakkad, Kerala",
+                      child: Text(
+                        "Near moyans school,\nPalakkad, Kerala",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -122,13 +129,16 @@ class _ContactScreenMobileState extends State<ContactScreenMobile> with Validato
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: () => launchAnyUrl(emailLaunchUri),
-                            child: Text(
-                              "topincitypalakkad@gmail.com",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    height: 1.2,
-                                    color: Colors.red,
-                                    decoration: TextDecoration.underline,
-                                  ),
+                            child: TextRenderer(
+                              text: "topincitypalakkad@gmail.com",
+                              child: Text(
+                                "topincitypalakkad@gmail.com",
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      height: 1.2,
+                                      color: Colors.red,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
                             ),
                           ),
                         ),
@@ -145,11 +155,14 @@ class _ContactScreenMobileState extends State<ContactScreenMobile> with Validato
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
-                      child: AutoSizeText(
-                        "Please fill the form and submit\nyour enquiry or suggestion about our products.",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
+                      child: TextRenderer(
+                        text: "Please fill the form and submit\nyour enquiry or suggestion about our products.",
+                        child: AutoSizeText(
+                          "Please fill the form and submit\nyour enquiry or suggestion about our products.",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                        ),
                       ),
                     ),
                     const SizedBox(

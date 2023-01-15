@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/core/constants.dart';
@@ -29,12 +31,15 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               Container(
                 width: size.width * 0.75,
                 margin: const EdgeInsets.symmetric(vertical: 15),
-                child: GradientText(
-                  '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.center,
-                  colors: gradientColors,
+                child: TextRenderer(
+                  text: '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
+                  child: GradientText(
+                    '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
+                    maxLines: 2,
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                    colors: gradientColors,
+                  ),
                 ),
               ),
               Align(
@@ -43,9 +48,12 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   child: CarouselSlider(
                     items: List.generate(
                       carouselImages.length,
-                      (index) => Image.network(
-                        carouselImages[index],
-                        fit: BoxFit.fill,
+                      (index) => ImageRenderer(
+                        alt: 'top in city services',
+                        child: Image.network(
+                          carouselImages[index],
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     options: CarouselOptions(
@@ -60,9 +68,12 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                 height: 20,
               ),
               Align(
-                child: Text(
-                  'OUR SERVICES',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                child: TextRenderer(
+                  text: 'our services',
+                  child: Text(
+                    'OUR SERVICES',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
               ),
               const SizedBox(

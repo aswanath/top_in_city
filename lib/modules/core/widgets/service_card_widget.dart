@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 
 class ServiceCard extends StatefulWidget {
   final String imageUrl;
@@ -40,9 +42,6 @@ class _ServiceCardState extends State<ServiceCard> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (_) {
-        // setState(() {
-        //   scale = 1.1;
-        // });
         _controller.forward();
       },
       onExit: (_) {
@@ -63,36 +62,45 @@ class _ServiceCardState extends State<ServiceCard> with SingleTickerProviderStat
                     aspectRatio: 12 / 9,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        widget.imageUrl,
-                        fit: BoxFit.cover,
+                      child: ImageRenderer(
+                        alt: '${widget.heading} image',
+                        child: Image.asset(
+                          widget.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  AutoSizeText(
-                    widget.heading,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          height: 1.2,
-                        ),
-                    maxLines: 2,
-                    minFontSize: 10,
+                  TextRenderer(
+                    text: widget.heading,
+                    child: AutoSizeText(
+                      widget.heading,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            height: 1.2,
+                          ),
+                      maxLines: 2,
+                      minFontSize: 10,
+                    ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Expanded(
                     child: Center(
-                      child: AutoSizeText(
-                        widget.description,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.1),
-                        maxLines: 4,
+                      child: TextRenderer(
+                        text: widget.heading,
+                        child: AutoSizeText(
+                          widget.description,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.1),
+                          maxLines: 4,
+                        ),
                       ),
                     ),
                   ),

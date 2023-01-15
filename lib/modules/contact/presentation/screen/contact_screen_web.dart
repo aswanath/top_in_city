@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:top_in_city/core/helpers/email_helper.dart';
 import 'package:top_in_city/modules/contact/helpers/validator_mixin.dart';
 import 'package:top_in_city/modules/contact/model/user_field_model.dart';
@@ -60,11 +61,14 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
       child: Column(
         children: [
           Center(
-            child: Text(
-              "CONTACT US",
-              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+            child: TextRenderer(
+              text: 'top in city - contact us',
+              child: Text(
+                "CONTACT US",
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
             ),
           ),
           const SizedBox(
@@ -78,19 +82,25 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
               children: [
                 Column(
                   children: [
-                    Text(
-                      "TOP IN CITY",
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
+                    TextRenderer(
+                      text: 'TOP IN CITY - catering services',
+                      child: Text(
+                        "TOP IN CITY",
+                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      "Near moyans school,\nPalakkad, Kerala",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
+                    TextRenderer(
+                      text: "Near moyans school,\nPalakkad, Kerala",
+                      child: Text(
+                        "Near moyans school,\nPalakkad, Kerala",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -126,13 +136,16 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: () => launchAnyUrl(emailLaunchUri),
-                            child: Text(
-                              "topincitypalakkad@gmail.com",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    height: 1.2,
-                                    color: Colors.red,
-                                    decoration: TextDecoration.underline,
-                                  ),
+                            child: TextRenderer(
+                              text: "topincitypalakkad@gmail.com",
+                              child: Text(
+                                "topincitypalakkad@gmail.com",
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      height: 1.2,
+                                      color: Colors.red,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
                             ),
                           ),
                         ),
@@ -144,10 +157,13 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Please fill the form and submit\nyour enquiry or suggestion about our products",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      maxLines: 2,
+                    TextRenderer(
+                      text: "Please fill the form and submit\nyour enquiry or suggestion about our products",
+                      child: Text(
+                        "Please fill the form and submit\nyour enquiry or suggestion about our products",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        maxLines: 2,
+                      ),
                     ),
                     const SizedBox(
                       height: 25,

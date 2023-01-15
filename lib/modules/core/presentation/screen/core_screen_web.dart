@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gsheets/gsheets.dart';
+import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/core/constants.dart';
@@ -166,15 +168,21 @@ class _AppBar extends StatelessWidget {
                     child: Column(
                       children: [
                         Expanded(
-                          child: Image.asset(
-                            topInCityLogo,
-                            fit: BoxFit.fitHeight,
+                          child: ImageRenderer(
+                            alt: 'top in city logo',
+                            child: Image.asset(
+                              topInCityLogo,
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
                         ),
-                        GradientText(
-                          'Catering and event management',
-                          style: Theme.of(context).textTheme.titleLarge,
-                          colors: gradientColors,
+                        TextRenderer(
+                          text: 'Catering and event management',
+                          child: GradientText(
+                            'Catering and event management',
+                            style: Theme.of(context).textTheme.titleLarge,
+                            colors: gradientColors,
+                          ),
                         ),
                       ],
                     ),
@@ -182,12 +190,15 @@ class _AppBar extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 400,
-                  child: GradientText(
-                    '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
-                    maxLines: 2,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                    textAlign: TextAlign.center,
-                    colors: gradientColors,
+                  child: TextRenderer(
+                    text: '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
+                    child: GradientText(
+                      '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
+                      maxLines: 2,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                      textAlign: TextAlign.center,
+                      colors: gradientColors,
+                    ),
                   ),
                 ),
               ],

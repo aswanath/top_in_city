@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 
 class ChildMenu {
   final String menuString;
@@ -120,9 +121,12 @@ class _CustomDropDownState extends State<CustomDropDown> {
                       decoration: BoxDecoration(
                         border: index != (widget.childMenu!.length - 1) ? const Border(bottom: BorderSide(color: Colors.black26)) : null,
                       ),
-                      child: Text(
-                        widget.childMenu![index].menuString,
-                        style: Theme.of(context).textTheme.titleMedium,
+                      child: TextRenderer(
+                        text: widget.childMenu![index].menuString,
+                        child: Text(
+                          widget.childMenu![index].menuString,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
                       ),
                     ),
                   );
@@ -148,9 +152,12 @@ class _Text extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.titleMedium,
+      child: TextRenderer(
+        text: text,
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
       ),
     );
   }

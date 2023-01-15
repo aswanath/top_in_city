@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:top_in_city/core/constants.dart';
 import 'package:top_in_city/core/helpers/email_helper.dart';
 
@@ -53,12 +54,15 @@ class Footer extends StatelessWidget {
                     ),
                     itemCount: footerLinks.length,
                     itemBuilder: (context, index) {
-                      return _Text(
-                        text: footerLinks[index].toUpperCase(),
-                        fontSize: menuFontSize,
-                        onTap: () {
-                          onTap(footerLinks[index]);
-                        },
+                      return TextRenderer(
+                        text: footerLinks[index],
+                        child: _Text(
+                          text: footerLinks[index].toUpperCase(),
+                          fontSize: menuFontSize,
+                          onTap: () {
+                            onTap(footerLinks[index]);
+                          },
+                        ),
                       );
                     },
                   ),
@@ -70,9 +74,12 @@ class Footer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Near Moyans School,\nPalakkad, Kerala, India.',
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: addressFontSize),
+                    TextRenderer(
+                      text: 'Near Moyans School,\nPalakkad, Kerala, India.',
+                      child: Text(
+                        'Near Moyans School,\nPalakkad, Kerala, India.',
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: addressFontSize),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -121,16 +128,19 @@ class Footer extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SelectionArea(
-                      child: MouseRegion(
-                        child: InkWell(
-                          onTap: () => launchAnyUrl(emailLaunchUri),
-                          child: Text(
-                            'Email: topincitypalakkad@gmail.com',
-                            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                  fontSize: addressFontSize,
-                                  decoration: TextDecoration.underline,
-                                ),
+                    TextRenderer(
+                      text: 'Email: topincitypalakkad@gmail.com',
+                      child: SelectionArea(
+                        child: MouseRegion(
+                          child: InkWell(
+                            onTap: () => launchAnyUrl(emailLaunchUri),
+                            child: Text(
+                              'Email: topincitypalakkad@gmail.com',
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    fontSize: addressFontSize,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                            ),
                           ),
                         ),
                       ),

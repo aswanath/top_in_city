@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gsheets/gsheets.dart';
+import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/core/constants.dart';
@@ -250,15 +252,20 @@ class _AppBar extends StatelessWidget {
                       child: Column(
                         children: [
                           Expanded(
-                            child: Image.asset(
-                              topInCityLogo,
-                              fit: BoxFit.fitWidth,
+                            child: ImageRenderer(
+                              alt: 'top in city logo',
+                              child: Image.asset(
+                                topInCityLogo,
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
                           ),
-                          GradientText(
-                            'Catering and event management',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 14),
-                            colors: gradientColors,
+                          TextRenderer(
+                            child: GradientText(
+                              'Catering and event management',
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 14),
+                              colors: gradientColors,
+                            ),
                           ),
                         ],
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
 
 class MenuScreenWeb extends StatefulWidget {
@@ -40,11 +41,14 @@ class _MenuScreenWebState extends State<MenuScreenWeb> {
               children: [
                 Expanded(
                   child: Center(
-                    child: Text(
-                      widget.selectedMenu.toUpperCase(),
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
+                    child: TextRenderer(
+                      text: widget.selectedMenu,
+                      child: Text(
+                        widget.selectedMenu.toUpperCase(),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
                     ),
                   ),
                 ),
@@ -119,32 +123,38 @@ class _MenuScreenWebState extends State<MenuScreenWeb> {
                             ? _PriceWidget(
                                 price: itemDetailsList.first,
                               )
-                            : AutoSizeText(
-                                isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
-                                style: Theme.of(context).textTheme.headlineMedium,
-                                maxLines: 1,
+                            : TextRenderer(
+                                text: isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
+                                child: AutoSizeText(
+                                  isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
+                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  maxLines: 1,
+                                ),
                               ),
                         SizedBox(
                           height: MediaQuery.of(context).size.width * 0.019,
                         ),
                         ...List.generate(
                           isMalayalam ? malayalamItemList.length : englishItemList.length,
-                          (textIndex) => AutoSizeText(
-                            isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
-                            style: isMalayalam
-                                ? Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                      fontSize: 18,
-                                      height: 1.5,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black,
-                                    )
-                                : Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                      height: 1.8,
-                                      fontSize: 18,
-                                    ),
-                            maxLines: 1,
-                            group: malayalamAutoSizeGroup,
-                            minFontSize: 8,
+                          (textIndex) => TextRenderer(
+                            text: isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
+                            child: AutoSizeText(
+                              isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
+                              style: isMalayalam
+                                  ? Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                        fontSize: 18,
+                                        height: 1.5,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.black,
+                                      )
+                                  : Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                        height: 1.8,
+                                        fontSize: 18,
+                                      ),
+                              maxLines: 1,
+                              group: malayalamAutoSizeGroup,
+                              minFontSize: 8,
+                            ),
                           ),
                         ),
                       ],
@@ -172,19 +182,22 @@ class _MenuScreenWebState extends State<MenuScreenWeb> {
                   ),
                   margin: const EdgeInsets.only(right: 40),
                   padding: const EdgeInsets.all(5),
-                  child: Text(
-                    isMalayalam ? "രണ്ടാം പായസം: പരിപ്പ് / ഗോതമ്പ് / സേമിയ" : "SECOND PAYASAM: PARIPPU / WHEAT / SEMIYA",
-                    style: isMalayalam
-                        ? Theme.of(context).textTheme.headlineLarge!.copyWith(
-                              fontSize: 14,
-                              height: 1.5,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.black,
-                            )
-                        : Theme.of(context).textTheme.headlineMedium!.copyWith(
-                              height: 1.8,
-                              fontSize: 14,
-                            ),
+                  child: TextRenderer(
+                    text: isMalayalam ? "രണ്ടാം പായസം: പരിപ്പ് / ഗോതമ്പ് / സേമിയ" : "SECOND PAYASAM: PARIPPU / WHEAT / SEMIYA",
+                    child: Text(
+                      isMalayalam ? "രണ്ടാം പായസം: പരിപ്പ് / ഗോതമ്പ് / സേമിയ" : "SECOND PAYASAM: PARIPPU / WHEAT / SEMIYA",
+                      style: isMalayalam
+                          ? Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                fontSize: 14,
+                                height: 1.5,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black,
+                              )
+                          : Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                height: 1.8,
+                                fontSize: 14,
+                              ),
+                    ),
                   ),
                 ),
               ),
@@ -222,12 +235,15 @@ class _PriceWidget extends StatelessWidget {
               price,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            AutoSizeText(
-              'PER LEAF',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Colors.black,
-                    height: 1,
-                  ),
+            TextRenderer(
+              text: 'top in city per leaf price',
+              child: AutoSizeText(
+                'PER LEAF',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black,
+                      height: 1,
+                    ),
+              ),
             ),
           ],
         ),

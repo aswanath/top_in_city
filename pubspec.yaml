@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.1.7
   gsheets: ^0.4.2
   flutter_bloc: ^8.1.1
+  seo_renderer: ^0.6.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
 import 'package:top_in_city/modules/core/widgets/service_card_widget.dart';
@@ -30,9 +32,12 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
                   child: CarouselSlider(
                     items: List.generate(
                       carouselImages.length,
-                      (index) => Image.network(
-                        carouselImages[index],
-                        fit: BoxFit.fill,
+                      (index) => ImageRenderer(
+                        alt: 'top in city services',
+                        child: Image.network(
+                          carouselImages[index],
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     options: CarouselOptions(
@@ -48,9 +53,12 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
               height: 30,
             ),
             Align(
-              child: Text(
-                'OUR SERVICES',
-                style: Theme.of(context).textTheme.headlineMedium,
+              child: TextRenderer(
+                text: 'our services',
+                child: Text(
+                  'OUR SERVICES',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
               ),
             ),
             const SizedBox(
