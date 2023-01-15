@@ -1,5 +1,5 @@
 name: top_in_city
-description: A new Flutter project.
+description: Top In City Catering Services.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -34,13 +34,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  google_fonts: ^3.0.1
-  flutter_screenutil: ^5.5.4
   simple_gradient_text: ^1.2.4
   carousel_slider: ^4.1.1
   auto_size_text: ^3.0.0
   flutter_staggered_grid_view: ^0.4.0
-  hidable: ^1.0.3
   url_launcher: ^6.1.7
   gsheets: ^0.4.2
   flutter_bloc: ^8.1.1

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
-import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
 import 'package:top_in_city/modules/core/widgets/service_card_widget.dart';
 
 class HomeScreenWeb extends StatefulWidget {
@@ -86,7 +85,6 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
             const SizedBox(
               height: 50,
             ),
-            // const Footer(),
           ],
         );
       },

@@ -4,9 +4,6 @@ import 'package:top_in_city/core/helpers/email_helper.dart';
 import 'package:top_in_city/modules/contact/helpers/validator_mixin.dart';
 import 'package:top_in_city/modules/contact/model/user_field_model.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
-import 'package:top_in_city/modules/core/widgets/custom_progress_bar.dart';
-
-import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreenWeb extends StatefulWidget {
   const ContactScreenWeb({Key? key}) : super(key: key);
@@ -57,12 +54,6 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
                 backgroundColor: Colors.red,
               ),
             );
-          }
-        } else if (state is LoadingState) {
-          if (state.isLoading) {
-            CustomProgressBar(context).showLoadingIndicator();
-          } else {
-            CustomProgressBar(context).hideLoadingIndicator();
           }
         }
       },
@@ -296,14 +287,3 @@ class _TextField extends StatelessWidget {
     );
   }
 }
-
-Future<void> _launchUrl(Uri url) async {
-  if (!await launchUrl(url)) {
-    throw 'Could not launch $url';
-  }
-}
-
-final Uri emailLaunchUri = Uri(
-  scheme: 'mailto',
-  path: 'atozwehelp@gmail.com',
-);

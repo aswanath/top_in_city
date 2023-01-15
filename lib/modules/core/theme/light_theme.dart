@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:top_in_city/core/asset_constants.dart';
-import 'package:top_in_city/core/constants.dart';
 
 final lightTheme = ThemeData(
-  // fontFamily: josefinSans,
   scaffoldBackgroundColor: Colors.white,
   primaryColor: Colors.black,
   primarySwatch: Colors.grey,

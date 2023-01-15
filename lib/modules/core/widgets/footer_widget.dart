@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:top_in_city/core/constants.dart';
 import 'package:top_in_city/core/helpers/email_helper.dart';

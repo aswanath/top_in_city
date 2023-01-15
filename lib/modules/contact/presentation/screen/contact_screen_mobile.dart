@@ -6,8 +6,6 @@ import 'package:top_in_city/modules/contact/helpers/validator_mixin.dart';
 import 'package:top_in_city/modules/contact/model/user_field_model.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
 class ContactScreenMobile extends StatefulWidget {
   const ContactScreenMobile({Key? key}) : super(key: key);
 
