@@ -103,7 +103,12 @@ class _CoreScreenWebState extends State<CoreScreenWeb> {
                   ],
                 ),
               ),
-              screen,
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height * 0.8,
+                ),
+                child: screen,
+              ),
               Footer(
                 onTap: (val) {
                   if (val == 'HOME') {

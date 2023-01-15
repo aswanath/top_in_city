@@ -49,15 +49,11 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
   }
 
   FutureOr<void> _onContactScreenTapped(event, emit) {
-    emit(LoadingState(isLoading: true));
     emit(NavigateToContactScreen());
-    emit(LoadingState(isLoading: false));
   }
 
   FutureOr<void> _onHomeScreenTapped(event, emit) {
-    emit(LoadingState(isLoading: true));
     emit(NavigateToHomeScreen());
-    emit(LoadingState(isLoading: false));
   }
 
   FutureOr<void> _onInitializeApi(event, emit) async {

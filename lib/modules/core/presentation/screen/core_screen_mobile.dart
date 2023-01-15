@@ -58,7 +58,7 @@ class _CoreScreenMobileState extends State<CoreScreenMobile> with SingleTickerPr
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.width * 0.14),
         child: _AppBar(
           icon: AnimatedIcon(
             icon: AnimatedIcons.menu_close,
@@ -236,7 +236,8 @@ class _AppBar extends StatelessWidget {
                   ),
                   child: IconButton(
                     onPressed: onIconTapped,
-                    iconSize: 28,
+                    padding: EdgeInsets.zero,
+                    iconSize: 24,
                     icon: icon,
                   ),
                 ),
