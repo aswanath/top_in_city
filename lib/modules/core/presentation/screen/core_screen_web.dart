@@ -73,61 +73,63 @@ class _CoreScreenWebState extends State<CoreScreenWeb> {
         },
         builder: (context, state) {
           final coreBloc = BlocProvider.of<CoreBloc>(context);
-          return ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 15,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomDropDown(
-                      menuText: 'Home',
-                      onTap: () => coreBloc.add(HomeScreenTapped()),
-                    ),
-                    if (menuList != null)
+          return InteractiveViewer(
+            child: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 15,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
                       CustomDropDown(
-                        menuText: 'Catering Menu',
-                        onTap: () {},
-                        childMenu: List.generate(
-                          menuList!.length,
-                          (index) => ChildMenu(
-                            menuString: menuList![index].title,
-                            onTap: () => coreBloc.add(
-                              MenuTapped(menuTitle: menuList![index].title),
+                        menuText: 'Home',
+                        onTap: () => coreBloc.add(HomeScreenTapped()),
+                      ),
+                      if (menuList != null)
+                        CustomDropDown(
+                          menuText: 'Catering Menu',
+                          onTap: () {},
+                          childMenu: List.generate(
+                            menuList!.length,
+                            (index) => ChildMenu(
+                              menuString: menuList![index].title,
+                              onTap: () => coreBloc.add(
+                                MenuTapped(menuTitle: menuList![index].title),
+                              ),
                             ),
                           ),
                         ),
+                      CustomDropDown(
+                        menuText: 'Contact',
+                        onTap: () => coreBloc.add(ContactScreenTapped()),
                       ),
-                    CustomDropDown(
-                      menuText: 'Contact',
-                      onTap: () => coreBloc.add(ContactScreenTapped()),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.8,
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height * 0.8,
+                  ),
+                  child: screen,
                 ),
-                child: screen,
-              ),
-              Footer(
-                onTap: (val) {
-                  if (val == 'Home') {
-                    coreBloc.add(HomeScreenTapped());
-                  } else if (val == 'Contact') {
-                    coreBloc.add(ContactScreenTapped());
-                  } else {
-                    coreBloc.add(
-                      MenuTapped(menuTitle: val),
-                    );
-                  }
-                },
-              ),
-            ],
+                Footer(
+                  onTap: (val) {
+                    if (val == 'Home') {
+                      coreBloc.add(HomeScreenTapped());
+                    } else if (val == 'Contact') {
+                      coreBloc.add(ContactScreenTapped());
+                    } else {
+                      coreBloc.add(
+                        MenuTapped(menuTitle: val),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           );
         },
       ),

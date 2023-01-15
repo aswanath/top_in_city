@@ -120,76 +120,78 @@ class _CoreScreenMobileState extends State<CoreScreenMobile> with SingleTickerPr
         },
         builder: (context, state) {
           final coreBloc = BlocProvider.of<CoreBloc>(context);
-          return ListView(
-            controller: scrollController,
-            shrinkWrap: true,
-            children: [
-              SizeTransition(
-                sizeFactor: doubleAnimation,
-                child: Container(
-                  height: footerLinks.length * menuListItemHeight,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  color: Colors.grey.withOpacity(0.1),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      footerLinks.length,
-                      (index) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (index != 0)
-                            const Divider(
-                              height: 5,
+          return InteractiveViewer(
+            child: ListView(
+              controller: scrollController,
+              shrinkWrap: true,
+              children: [
+                SizeTransition(
+                  sizeFactor: doubleAnimation,
+                  child: Container(
+                    height: footerLinks.length * menuListItemHeight,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    color: Colors.grey.withOpacity(0.1),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        footerLinks.length,
+                        (index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (index != 0)
+                              const Divider(
+                                height: 5,
+                              ),
+                            CustomDropDown(
+                              menuText: footerLinks[index],
+                              onTap: () {
+                                if (footerLinks[index] == 'Home') {
+                                  coreBloc.add(HomeScreenTapped());
+                                } else if (footerLinks[index] == 'Contact') {
+                                  coreBloc.add(ContactScreenTapped());
+                                } else {
+                                  coreBloc.add(
+                                    MenuTapped(menuTitle: footerLinks[index]),
+                                  );
+                                }
+                              },
                             ),
-                          CustomDropDown(
-                            menuText: footerLinks[index],
-                            onTap: () {
-                              if (footerLinks[index] == 'Home') {
-                                coreBloc.add(HomeScreenTapped());
-                              } else if (footerLinks[index] == 'Contact') {
-                                coreBloc.add(ContactScreenTapped());
-                              } else {
-                                coreBloc.add(
-                                  MenuTapped(menuTitle: footerLinks[index]),
-                                );
-                              }
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.8,
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height * 0.8,
+                  ),
+                  child: screen,
                 ),
-                child: screen,
-              ),
-              Footer(
-                padding: 10,
-                crossAxisCount: 4,
-                mainAxisExtent: 100,
-                addressFontSize: 8,
-                menuFontSize: 6,
-                onTap: (val) {
-                  if (val == 'Home') {
-                    coreBloc.add(HomeScreenTapped());
-                  } else if (val == 'Contact') {
-                    coreBloc.add(ContactScreenTapped());
-                  } else {
-                    coreBloc.add(
-                      MenuTapped(menuTitle: val),
-                    );
-                  }
-                },
-              ),
-            ],
+                Footer(
+                  padding: 10,
+                  crossAxisCount: 4,
+                  mainAxisExtent: 100,
+                  addressFontSize: 8,
+                  menuFontSize: 6,
+                  onTap: (val) {
+                    if (val == 'Home') {
+                      coreBloc.add(HomeScreenTapped());
+                    } else if (val == 'Contact') {
+                      coreBloc.add(ContactScreenTapped());
+                    } else {
+                      coreBloc.add(
+                        MenuTapped(menuTitle: val),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           );
         },
       ),

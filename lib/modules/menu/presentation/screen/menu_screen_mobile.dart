@@ -35,7 +35,9 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
       },
       builder: (context, state) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.075),
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05,
+          ),
           child: Column(
             children: [
               Center(
@@ -137,19 +139,20 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                                 isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
                                 style: isMalayalam
                                     ? Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 10,
                                           height: 1.5,
                                           fontWeight: FontWeight.w900,
                                           color: Colors.black,
                                         )
                                     : Theme.of(context).textTheme.headlineMedium!.copyWith(
                                           height: 1.8,
-                                          fontSize: 14,
+                                          fontSize: 10,
                                         ),
                                 maxLines: 1,
                                 group: malayalamAutoSizeGroup,
-                                minFontSize: 8,
+                                minFontSize: 4,
                                 wrapWords: false,
+                                maxFontSize: 14,
                               ),
                             ),
                           ),
