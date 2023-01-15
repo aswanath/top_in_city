@@ -128,7 +128,7 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                                           fontSize: 10,
                                         ),
                                     maxLines: 1,
-                                    minFontSize: 6,
+                                    minFontSize: 8,
                                     maxFontSize: 14,
                                     wrapWords: false,
                                   ),
