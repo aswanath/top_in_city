@@ -20,11 +20,13 @@ class MenuScreenWeb extends StatefulWidget {
 }
 
 class _MenuScreenWebState extends State<MenuScreenWeb> {
-  final AutoSizeGroup autoSizeGroup = AutoSizeGroup();
+  final AutoSizeGroup malayalamAutoSizeGroup = AutoSizeGroup();
+  final AutoSizeGroup englishAutoSizeGroup = AutoSizeGroup();
   bool isMalayalam = true;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return BlocConsumer<CoreBloc, CoreState>(
       listener: (context, state) {
         if (state is ChangedLanguage) {
@@ -83,65 +85,70 @@ class _MenuScreenWebState extends State<MenuScreenWeb> {
               shrinkWrap: true,
               itemCount: widget.menuRows.length,
               padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
-              physics: const BouncingScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 var itemDetailsList = widget.menuRows[index];
                 var englishItemList = itemDetailsList[1].split(',').toList();
                 var malayalamItemList = itemDetailsList[2].split(',').toList();
-                return Container(
-                  padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.019),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(offset: const Offset(3, 2), blurRadius: 5, color: Colors.black.withOpacity(.5)),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      tileMode: TileMode.decal,
-                      colors: [
-                        Color(0xffF9CC5E),
-                        Colors.white,
+                return SelectionArea(
+                  child: Container(
+                    padding: EdgeInsets.all(size.width * 0.01),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(3, 2),
+                          blurRadius: 5,
+                          color: Colors.black.withOpacity(.5),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        tileMode: TileMode.decal,
+                        colors: [
+                          Color(0xffF9CC5E),
+                          Colors.white,
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        int.tryParse(itemDetailsList.first) != null
+                            ? _PriceWidget(
+                                price: itemDetailsList.first,
+                              )
+                            : AutoSizeText(
+                                isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
+                                style: Theme.of(context).textTheme.headlineMedium,
+                                maxLines: 1,
+                              ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.019,
+                        ),
+                        ...List.generate(
+                          isMalayalam ? malayalamItemList.length : englishItemList.length,
+                          (textIndex) => AutoSizeText(
+                            isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
+                            style: isMalayalam
+                                ? Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                      fontSize: 18,
+                                      height: 1.5,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black,
+                                    )
+                                : Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                      height: 1.8,
+                                      fontSize: 18,
+                                    ),
+                            maxLines: 1,
+                            group: malayalamAutoSizeGroup,
+                            minFontSize: 8,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      int.tryParse(itemDetailsList.first) != null
-                          ? _PriceWidget(
-                              price: itemDetailsList.first,
-                            )
-                          : AutoSizeText(
-                              isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
-                              style: Theme.of(context).textTheme.headlineMedium,
-                              maxLines: 1,
-                            ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.019,
-                      ),
-                      ...List.generate(
-                        isMalayalam ? malayalamItemList.length : englishItemList.length,
-                        (textIndex) => AutoSizeText(
-                          isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
-                          style: isMalayalam
-                              ? Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                    fontSize: 18,
-                                    height: 1.5,
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.black,
-                                  )
-                              : Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                    height: 1.8,
-                                    fontSize: 18,
-                                  ),
-                          maxLines: 1,
-                          group: autoSizeGroup,
-                          minFontSize: 8,
-                          maxFontSize: 14,
-                        ),
-                      ),
-                    ],
                   ),
                 );
               },
@@ -155,6 +162,32 @@ class _MenuScreenWebState extends State<MenuScreenWeb> {
                 staggeredTileCount: widget.menuRows.length,
               ),
             ),
+            if (widget.selectedMenu == 'Sadhya Packages ( Veg )')
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  margin: const EdgeInsets.only(right: 40),
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    isMalayalam ? "രണ്ടാം പായസം: പരിപ്പ് / ഗോതമ്പ് / സേമിയ" : "SECOND PAYASAM: PARIPPU / WHEAT / SEMIYA",
+                    style: isMalayalam
+                        ? Theme.of(context).textTheme.headlineLarge!.copyWith(
+                              fontSize: 14,
+                              height: 1.5,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.black,
+                            )
+                        : Theme.of(context).textTheme.headlineMedium!.copyWith(
+                              height: 1.8,
+                              fontSize: 14,
+                            ),
+                  ),
+                ),
+              ),
             const SizedBox(
               height: 50,
             ),

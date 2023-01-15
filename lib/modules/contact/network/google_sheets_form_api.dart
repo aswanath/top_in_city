@@ -18,10 +18,14 @@ class GoogleSheetsFormApi {
   ''';
   static final _gSheets = GSheets(_credentials);
   static Worksheet? _worksheet;
+  static Worksheet? _imageWorksheet;
+  static List<String> images = [];
 
   static Future init() async {
     final spreadsheet = await _gSheets.spreadsheet(_spreadSheetId);
     _worksheet = await getWorkSheet(spreadSheet: spreadsheet, title: 'Top In City - Queries');
+    _imageWorksheet = await getWorkSheet(spreadSheet: spreadsheet, title: 'Images');
+    images = (await _imageWorksheet?.values.allColumns())?.first ?? [];
   }
 
   static Future<Worksheet> getWorkSheet({

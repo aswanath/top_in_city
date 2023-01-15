@@ -6,8 +6,8 @@ const gradientColors = [
   Color(0xffFF0303),
 ];
 List<String> footerLinks = [
-  'HOME',
-  'CONTACT',
+  'Home',
+  'Contact',
 ];
 const String sadhyaPackages = 'Sadhya Packages ( Veg )';
 const String nonVegFoodMenu = 'Non-Veg Food Menu';

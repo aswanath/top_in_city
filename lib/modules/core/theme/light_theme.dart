@@ -35,6 +35,12 @@ final lightTheme = ThemeData(
       color: Colors.black,
       fontSize: 22,
     ),
+    headlineSmall: const TextStyle(
+      fontFamily: josefinSans,
+      fontWeight: FontWeight.w700,
+      color: Colors.black,
+      fontSize: 18,
+    ),
     titleLarge: const TextStyle(
       fontFamily: chilanka,
       fontSize: 17,

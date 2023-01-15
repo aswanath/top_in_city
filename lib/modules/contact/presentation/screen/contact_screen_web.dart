@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:top_in_city/core/helpers/email_helper.dart';
 import 'package:top_in_city/modules/contact/helpers/validator_mixin.dart';
 import 'package:top_in_city/modules/contact/model/user_field_model.dart';
-import 'package:top_in_city/modules/contact/network/google_sheets_form_api.dart';
+import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
+import 'package:top_in_city/modules/core/widgets/custom_progress_bar.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,201 +35,213 @@ class _ContactScreenWebState extends State<ContactScreenWeb> with ValidatorMixin
   @override
   Widget build(BuildContext context) {
     var scaffoldMessenger = ScaffoldMessenger.of(context);
-    return Column(
-      children: [
-        Center(
-          child: Text(
-            "CONTACT US",
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+    return BlocListener<CoreBloc, CoreState>(
+      listener: (context, state) {
+        if (state is ContactFormResult) {
+          if (state.isSuccess) {
+            nameController.clear();
+            emailController.clear();
+            phoneController.clear();
+            messageController.clear();
+            formKey.currentState!.reset();
+            scaffoldMessenger.showSnackBar(
+              const SnackBar(
+                content: Text("Submitted the form successfully"),
+                backgroundColor: Colors.green,
+              ),
+            );
+          } else {
+            scaffoldMessenger.showSnackBar(
+              const SnackBar(
+                content: Text("Form submission failed"),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        } else if (state is LoadingState) {
+          if (state.isLoading) {
+            CustomProgressBar(context).showLoadingIndicator();
+          } else {
+            CustomProgressBar(context).hideLoadingIndicator();
+          }
+        }
+      },
+      child: Column(
+        children: [
+          Center(
+            child: Text(
+              "CONTACT US",
+              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    "TOP IN CITY",
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Near moyans school,\nPalakkad, Kerala",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      text: "Phone:",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            height: 1.2,
-                            fontWeight: FontWeight.w800,
+          const SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      "TOP IN CITY",
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            fontWeight: FontWeight.w500,
                           ),
-                      children: [
-                        TextSpan(
-                          text: " +919995755339, +919961147164",
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
-                        ),
-                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Email: ",
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Near moyans school,\nPalakkad, Kerala",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text.rich(
+                      TextSpan(
+                        text: "Phone:",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               height: 1.2,
                               fontWeight: FontWeight.w800,
                             ),
-                      ),
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () => _launchUrl(emailLaunchUri),
-                          child: Text(
-                            "atozwehelp@gmail.com",
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  height: 1.2,
-                                  color: Colors.red,
-                                  decoration: TextDecoration.underline,
-                                ),
+                        children: [
+                          TextSpan(
+                            text: " +919995755339, +919961147164",
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.2),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Please fill the form and submit\nyour enquiry or suggestion about our products",
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    maxLines: 2,
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Form(
-                    key: formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
                       children: [
-                        _TextField(
-                          label: "Name: ",
-                          hintText: "Name",
-                          validator: nameValidator,
-                          controller: nameController,
+                        Text(
+                          "Email: ",
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                height: 1.2,
+                                fontWeight: FontWeight.w800,
+                              ),
                         ),
-                        _TextField(
-                          label: "Email: ",
-                          hintText: "Email",
-                          validator: emailValidator,
-                          controller: emailController,
-                        ),
-                        _TextField(
-                          label: "Phone: ",
-                          hintText: "Phone",
-                          validator: phoneValidator,
-                          controller: phoneController,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text(
-                          "Message: ",
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * .30,
-                          child: TextFormField(
-                            controller: messageController,
-                            maxLines: 5,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            validator: messageValidator,
-                            decoration: const InputDecoration(
-                              hintText: "Message",
-                              hintStyle: TextStyle(fontSize: 14),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 11),
-                              border: OutlineInputBorder(),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () => launchAnyUrl(emailLaunchUri),
+                            child: Text(
+                              "topincitypalakkad@gmail.com",
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    height: 1.2,
+                                    color: Colors.red,
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              final form = {
-                                UserFields.name: nameController.text,
-                                UserFields.email: emailController.text,
-                                UserFields.phone: phoneController.text,
-                                UserFields.message: messageController.text,
-                              };
-                              var result = await GoogleSheetsFormApi.createField(form);
-                              if (result) {
-                                nameController.clear();
-                                emailController.clear();
-                                phoneController.clear();
-                                messageController.clear();
-                                formKey.currentState!.reset();
-                                scaffoldMessenger.showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Submitted the form successfully"),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
-                              } else {
-                                scaffoldMessenger.showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Form submission failed"),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              }
-                            }
-                          },
-                          child: Text(
-                            "SUBMIT",
-                            style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Please fill the form and submit\nyour enquiry or suggestion about our products",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Form(
+                      key: formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _TextField(
+                            label: "Name: ",
+                            hintText: "Name",
+                            validator: nameValidator,
+                            controller: nameController,
+                          ),
+                          _TextField(
+                            label: "Email: ",
+                            hintText: "Email",
+                            validator: emailValidator,
+                            controller: emailController,
+                          ),
+                          _TextField(
+                            label: "Phone: ",
+                            hintText: "Phone",
+                            validator: phoneValidator,
+                            controller: phoneController,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const Text(
+                            "Message: ",
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .30,
+                            child: TextFormField(
+                              controller: messageController,
+                              maxLines: 5,
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: messageValidator,
+                              decoration: const InputDecoration(
+                                hintText: "Message",
+                                hintStyle: TextStyle(fontSize: 14),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 11),
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                final form = {
+                                  UserFields.name: nameController.text,
+                                  UserFields.email: emailController.text,
+                                  UserFields.phone: phoneController.text,
+                                  UserFields.message: messageController.text,
+                                };
+                                BlocProvider.of<CoreBloc>(context).add(ContactFormSubmitted(form: form));
+                              }
+                            },
+                            child: Text(
+                              "SUBMIT",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 40,
-        ),
-      ],
+          const SizedBox(
+            height: 40,
+          ),
+        ],
+      ),
     );
   }
 }

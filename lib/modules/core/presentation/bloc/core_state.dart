@@ -38,3 +38,15 @@ class LoadingState extends CoreState {
 
   LoadingState({this.isLoading = false});
 }
+
+class BurgerMenuChanged extends CoreState {
+  final bool isExpanded;
+
+  BurgerMenuChanged({required this.isExpanded});
+}
+
+class ContactFormResult extends CoreState {
+  final bool isSuccess;
+
+  ContactFormResult({required this.isSuccess});
+}

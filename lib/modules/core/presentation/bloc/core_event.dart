@@ -24,3 +24,15 @@ class SwitchLanguage extends CoreEvent {
 
   SwitchLanguage({required this.isMalayalam});
 }
+
+class BurgerMenuTapped extends CoreEvent {
+  final bool isExpanded;
+
+  BurgerMenuTapped({required this.isExpanded});
+}
+
+class ContactFormSubmitted extends CoreEvent {
+  final Map<String, dynamic> form;
+
+  ContactFormSubmitted({required this.form});
+}

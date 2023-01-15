@@ -6,6 +6,6 @@ const String vegImage = 'asset/images/veg.png';
 const String videographyImage = 'asset/images/videography.jpg';
 const String chilanka = 'Chilanka';
 const String josefinSans = 'JosefinSans';
-const List<String> carouselImages = [
-  'asset/images/carousel_image_1.png',
+List<String> carouselImages = [
+  // 'asset/images/carousel_image_1.png',
 ];

@@ -178,7 +178,7 @@ class _AppBar extends StatelessWidget {
                 SizedBox(
                   width: 400,
                   child: GradientText(
-                    'അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള.',
+                    '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
                     maxLines: 2,
                     style: Theme.of(context).textTheme.headlineLarge,
                     textAlign: TextAlign.center,
