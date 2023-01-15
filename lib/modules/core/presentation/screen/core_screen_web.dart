@@ -12,6 +12,7 @@ import 'package:top_in_city/modules/core/widgets/custom_progress_bar.dart';
 import 'package:top_in_city/modules/core/widgets/drop_down_widget.dart';
 import 'package:top_in_city/modules/core/widgets/footer_widget.dart';
 import 'package:top_in_city/modules/home/presentation/screen/home_screen_web.dart';
+import 'package:top_in_city/modules/menu/presentation/screen/menu_screen_args.dart';
 import 'package:top_in_city/modules/menu/presentation/screen/menu_screen_web.dart';
 
 class CoreScreenWeb extends StatefulWidget {
@@ -55,8 +56,10 @@ class _CoreScreenWebState extends State<CoreScreenWeb> {
             screen = const ContactScreenWeb();
           } else if (state is NavigateToMenuScreen) {
             screen = MenuScreenWeb(
-              selectedMenu: state.screenName,
-              menuRows: state.menuRows ?? [],
+              args: MenuScreenArgs(
+                selectedMenu: state.screenName,
+                menuRows: state.menuRows ?? [],
+              ),
             );
           } else if (state is FetchedAllMenus) {
             menuList = state.menuList;

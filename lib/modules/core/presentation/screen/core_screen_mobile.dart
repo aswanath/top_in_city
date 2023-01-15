@@ -12,6 +12,7 @@ import 'package:top_in_city/modules/core/widgets/custom_progress_bar.dart';
 import 'package:top_in_city/modules/core/widgets/drop_down_widget.dart';
 import 'package:top_in_city/modules/core/widgets/footer_widget.dart';
 import 'package:top_in_city/modules/home/presentation/screen/home_screen_mobile.dart';
+import 'package:top_in_city/modules/menu/presentation/screen/menu_screen_args.dart';
 import 'package:top_in_city/modules/menu/presentation/screen/menu_screen_mobile.dart';
 
 const menuListItemHeight = 37.0;
@@ -88,8 +89,10 @@ class _CoreScreenMobileState extends State<CoreScreenMobile> with SingleTickerPr
             controller.reverse();
           } else if (state is NavigateToMenuScreen) {
             screen = MenuScreenMobile(
-              selectedMenu: state.screenName,
-              menuRows: state.menuRows ?? [],
+              args: MenuScreenArgs(
+                selectedMenu: state.screenName,
+                menuRows: state.menuRows ?? [],
+              ),
             );
             isExpanded = false;
             controller.reverse();

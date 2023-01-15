@@ -5,15 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
+import 'package:top_in_city/modules/menu/presentation/screen/menu_screen_args.dart';
 
 class MenuScreenMobile extends StatefulWidget {
-  final String selectedMenu;
-  final List<List<String>> menuRows;
+  final MenuScreenArgs args;
 
   const MenuScreenMobile({
     Key? key,
-    required this.selectedMenu,
-    required this.menuRows,
+    required this.args,
   }) : super(key: key);
 
   @override
@@ -43,9 +42,9 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: TextRenderer(
-                    text: widget.selectedMenu,
+                    text: widget.args.selectedMenu,
                     child: Text(
-                      widget.selectedMenu.toUpperCase(),
+                      widget.args.selectedMenu.toUpperCase(),
                       style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
@@ -84,11 +83,10 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
               ),
               StaggeredGridView.builder(
                 shrinkWrap: true,
-                itemCount: widget.menuRows.length,
-                // padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+                itemCount: widget.args.menuRows.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  var itemDetailsList = widget.menuRows[index];
+                  var itemDetailsList = widget.args.menuRows[index];
                   var englishItemList = itemDetailsList[1].split(',').toList();
                   var malayalamItemList = itemDetailsList[2].split(',').toList();
                   return SelectionArea(
@@ -167,10 +165,10 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 25,
-                  staggeredTileCount: widget.menuRows.length,
+                  staggeredTileCount: widget.args.menuRows.length,
                 ),
               ),
-              if (widget.selectedMenu == 'Sadhya Packages ( Veg )')
+              if (widget.args.selectedMenu == 'Sadhya Packages ( Veg )')
                 Align(
                   alignment: Alignment.centerRight,
                   child: Container(
