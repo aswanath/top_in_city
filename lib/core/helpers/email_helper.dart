@@ -8,5 +8,5 @@ Future<void> launchAnyUrl(Uri url) async {
 
 final Uri emailLaunchUri = Uri(
   scheme: 'mailto',
-  path: 'topincitypalakkad@gmail.com',
+  path: 'contact@topincitycatering.com',
 );

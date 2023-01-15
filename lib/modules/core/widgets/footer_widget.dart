@@ -129,13 +129,13 @@ class Footer extends StatelessWidget {
                       ],
                     ),
                     TextRenderer(
-                      text: 'Email: topincitypalakkad@gmail.com',
+                      text: 'Email: contact@topincitycatering.com',
                       child: SelectionArea(
                         child: MouseRegion(
                           child: InkWell(
                             onTap: () => launchAnyUrl(emailLaunchUri),
                             child: Text(
-                              'Email: topincitypalakkad@gmail.com',
+                              'Email: contact@topincitycatering.com',
                               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                     fontSize: addressFontSize,
                                     decoration: TextDecoration.underline,

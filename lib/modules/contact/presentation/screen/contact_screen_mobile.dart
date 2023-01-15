@@ -130,9 +130,9 @@ class _ContactScreenMobileState extends State<ContactScreenMobile> with Validato
                           child: GestureDetector(
                             onTap: () => launchAnyUrl(emailLaunchUri),
                             child: TextRenderer(
-                              text: "topincitypalakkad@gmail.com",
+                              text: "contact@topincitycatering.com",
                               child: Text(
-                                "topincitypalakkad@gmail.com",
+                                "contact@topincitycatering.com",
                                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                       height: 1.2,
                                       color: Colors.red,

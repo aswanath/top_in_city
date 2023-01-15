@@ -137,7 +137,7 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                                 isMalayalam ? malayalamItemList[textIndex].trim() : englishItemList[textIndex].trim(),
                                 style: isMalayalam
                                     ? Theme.of(context).textTheme.headlineLarge!.copyWith(
-                                          fontSize: 18,
+                                          fontSize: 14,
                                           height: 1.5,
                                           fontWeight: FontWeight.w900,
                                           color: Colors.black,
