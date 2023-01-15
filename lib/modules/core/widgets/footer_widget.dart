@@ -85,14 +85,14 @@ class Footer extends StatelessWidget {
                           child: MouseRegion(
                             child: InkWell(
                               onTap: () {
-                                if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+                                try {
                                   launchAnyUrl(
                                     Uri(
                                       scheme: 'tel',
                                       path: '+919995755339',
                                     ),
                                   );
-                                }
+                                } catch (_) {}
                               },
                               child: Text(
                                 'Phone: +91 9995755339,',
@@ -105,14 +105,14 @@ class Footer extends StatelessWidget {
                           child: MouseRegion(
                             child: InkWell(
                               onTap: () {
-                                if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+                                try {
                                   launchAnyUrl(
                                     Uri(
                                       scheme: 'tel',
                                       path: '+919961147164',
                                     ),
                                   );
-                                }
+                                } catch (_) {}
                               },
                               child: Text(
                                 ' +91 9961147164',

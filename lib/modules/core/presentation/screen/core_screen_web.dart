@@ -111,9 +111,9 @@ class _CoreScreenWebState extends State<CoreScreenWeb> {
               ),
               Footer(
                 onTap: (val) {
-                  if (val == 'HOME') {
+                  if (val == 'Home') {
                     coreBloc.add(HomeScreenTapped());
-                  } else if (val == 'CONTACT') {
+                  } else if (val == 'Contact') {
                     coreBloc.add(ContactScreenTapped());
                   } else {
                     coreBloc.add(

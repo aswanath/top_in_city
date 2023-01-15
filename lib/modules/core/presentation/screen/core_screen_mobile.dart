@@ -58,7 +58,7 @@ class _CoreScreenMobileState extends State<CoreScreenMobile> with SingleTickerPr
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.width * 0.14),
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.width * 0.2),
         child: _AppBar(
           icon: AnimatedIcon(
             icon: AnimatedIcons.menu_close,
@@ -117,6 +117,7 @@ class _CoreScreenMobileState extends State<CoreScreenMobile> with SingleTickerPr
           final coreBloc = BlocProvider.of<CoreBloc>(context);
           return ListView(
             controller: scrollController,
+            shrinkWrap: true,
             children: [
               SizeTransition(
                 sizeFactor: doubleAnimation,

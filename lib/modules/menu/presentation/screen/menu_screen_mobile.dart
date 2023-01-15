@@ -137,11 +137,12 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                                       )
                                   : Theme.of(context).textTheme.headlineMedium!.copyWith(
                                         height: 1.8,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                       ),
                               maxLines: 1,
                               group: malayalamAutoSizeGroup,
                               minFontSize: 8,
+                              wrapWords: false,
                             ),
                           ),
                         ],
