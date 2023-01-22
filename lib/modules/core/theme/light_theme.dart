@@ -29,13 +29,13 @@ final lightTheme = ThemeData(
     ),
     headlineMedium: const TextStyle(
       fontFamily: josefinSans,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w100,
       color: Colors.black,
       fontSize: 22,
     ),
     headlineSmall: const TextStyle(
       fontFamily: josefinSans,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w400,
       color: Colors.black,
       fontSize: 18,
     ),
@@ -45,12 +45,12 @@ final lightTheme = ThemeData(
     ),
     titleMedium: const TextStyle(
       fontFamily: josefinSans,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w400,
       fontSize: 18,
     ),
     bodyMedium: const TextStyle(
       fontFamily: josefinSans,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       fontSize: 18,
     ),
     bodySmall: TextStyle(

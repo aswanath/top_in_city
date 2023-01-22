@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,8 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                 width: size.width * 0.75,
                 margin: const EdgeInsets.symmetric(vertical: 15),
                 child: TextRenderer(
-                  text: '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
+                  text:
+                      '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
                   child: GradientText(
                     '"അമ്മയുടെ കയ്യിൽ നിന്നും നാവിൻ തുമ്പിലേക്ക് രുചിയുടെ മേള."',
                     maxLines: 2,
@@ -45,22 +47,40 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               Align(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: CarouselSlider(
-                    items: List.generate(
-                      carouselImages.length,
-                      (index) => ImageRenderer(
-                        alt: 'top in city services',
-                        child: Image.network(
-                          carouselImages[index],
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    options: CarouselOptions(
-                      padEnds: false,
-                      viewportFraction: 1,
-                      autoPlay: true,
-                    ),
+                  child: SizedBox(
+                    height: size.height * 0.30,
+                    width: size.width * 0.78,
+                    child: carouselImages.isNotEmpty
+                        ? CarouselSlider(
+                            items: List.generate(
+                              carouselImages.length,
+                              (index) => ImageRenderer(
+                                alt: 'top in city services',
+                                child: CachedNetworkImage(
+                                  imageUrl: carouselImages[index],
+                                  fit: BoxFit.cover,
+                                  memCacheWidth: (size.width * 0.70) ~/ 0.5,
+                                  memCacheHeight: (size.height * 0.66) ~/ 0.5,
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 200),
+                                  fadeOutDuration:
+                                      const Duration(milliseconds: 200),
+                                  useOldImageOnUrlChange: true,
+                                ),
+                              ),
+                            ),
+                            options: CarouselOptions(
+                              padEnds: false,
+                              viewportFraction: 1,
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                            ),
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -87,17 +107,20 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                     ServiceCard(
                       imageUrl: cateringServiceImage,
                       heading: 'OUTDOOR-INDOOR\nCATERING SERVICES',
-                      description: 'We offer on site catering and also we parcel the food for you and serve the delicious food.',
+                      description:
+                          'We offer on site catering and also we parcel the food for you and serve the delicious food.',
                     ),
                     ServiceCard(
                       imageUrl: eventManagementImage,
                       heading: 'EVENT\nMANAGEMENT',
-                      description: 'Worried about the event management? Don’t worry! we have got you. Sit back and Relax.',
+                      description:
+                          'Worried about the event management? Don’t worry! we have got you. Sit back and Relax.',
                     ),
                     ServiceCard(
                       imageUrl: videographyImage,
                       heading: 'PHOTO /\nVIDEOGRAPHY',
-                      description: 'We have got photo / videographers who are professional in this field.',
+                      description:
+                          'We have got photo / videographers who are professional in this field.',
                     ),
                   ],
                 ),

@@ -125,7 +125,8 @@ class _MenuScreenMobileState extends State<MenuScreenMobile> {
                                   child: AutoSizeText(
                                     isMalayalam ? itemDetailsList.first.split(',')[1].trim() : itemDetailsList.first.split(',')[0].trim(),
                                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                          fontSize: 10,
+                                          fontSize: 14,
+                                      fontWeight: FontWeight.w900,
                                         ),
                                     maxLines: 1,
                                     minFontSize: 8,
