@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:top_in_city/core/asset_constants.dart';
@@ -57,9 +57,8 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
   }
 
   FutureOr<void> _onInitializeApi(event, emit) async {
-    emit(LoadingState(isLoading: true));
-    await GoogleSheetsFormApi.init();
-    await GoogleSheetsMenuApi.init();
+    await compute(GoogleSheetsFormApi.init,{});
+    await compute(GoogleSheetsMenuApi.init,{});
     menuList = GoogleSheetsMenuApi.menuList;
     var menuListTitles = menuList?.map((e) => e.title).toList() ?? [];
     if (menuListTitles.isNotEmpty && footerLinks.length == 2) {
@@ -71,12 +70,11 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
         menuList: menuList,
       ),
     );
-    emit(LoadingState(isLoading: false));
   }
 
   FutureOr<void> _onMenuTapped(MenuTapped event, emit) async {
     emit(LoadingState(isLoading: true));
-    var menu = await GoogleSheetsMenuApi.getWorkSheet(title: event.menuTitle);
+    var menu =  GoogleSheetsMenuApi.getWorkSheet(title: event.menuTitle);
     var menuRows = await menu?.values.allRows();
     emit(
       NavigateToMenuScreen(

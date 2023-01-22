@@ -42,6 +42,7 @@ dependencies:
   gsheets: ^0.4.2
   flutter_bloc: ^8.1.1
   seo_renderer: ^0.6.0
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

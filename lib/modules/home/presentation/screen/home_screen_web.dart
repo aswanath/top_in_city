@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ class HomeScreenWeb extends StatefulWidget {
 class _HomeScreenWebState extends State<HomeScreenWeb> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return BlocBuilder<CoreBloc, CoreState>(
       builder: (context, state) {
         return Column(
@@ -27,25 +29,41 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.66,
-                  width: MediaQuery.of(context).size.width * 0.70,
-                  child: CarouselSlider(
-                    items: List.generate(
-                      carouselImages.length,
-                      (index) => ImageRenderer(
-                        alt: 'top in city services',
-                        child: Image.network(
-                          carouselImages[index],
-                          fit: BoxFit.fill,
+                  height:size.height * 0.66,
+                  width:size.width * 0.70,
+                  child: carouselImages.isNotEmpty
+                      ? CarouselSlider(
+                          items: List.generate(
+                            carouselImages.length,
+                            (index) => ImageRenderer(
+                              alt: 'top in city services',
+                              child: CachedNetworkImage(
+                                imageUrl: carouselImages[index],
+                                fit: BoxFit.cover,
+                                height: size.height * 0.66,
+                                width: size.width * 0.70,
+                                memCacheWidth: (size.width * 0.70) ~/ 0.5,
+                                memCacheHeight: (size.height * 0.66) ~/ 0.5,
+                                fadeInDuration:
+                                    const Duration(milliseconds: 200),
+                                fadeOutDuration:
+                                    const Duration(milliseconds: 200),
+                                useOldImageOnUrlChange: true,
+                              ),
+                            ),
+                          ),
+                          options: CarouselOptions(
+                            padEnds: false,
+                            viewportFraction: 1,
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                          ),
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
-                      ),
-                    ),
-                    options: CarouselOptions(
-                      padEnds: false,
-                      viewportFraction: 1,
-                      autoPlay: true,
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -75,17 +93,20 @@ class _HomeScreenWebState extends State<HomeScreenWeb> {
                   ServiceCard(
                     imageUrl: cateringServiceImage,
                     heading: 'OUTDOOR-INDOOR\nCATERING SERVICES',
-                    description: 'We offer on site catering and also we parcel the food for you and serve the delicious food.',
+                    description:
+                        'We offer on site catering and also we parcel the food for you and serve the delicious food.',
                   ),
                   ServiceCard(
                     imageUrl: eventManagementImage,
                     heading: 'EVENT\nMANAGEMENT',
-                    description: 'Worried about the event management? Don’t worry! we have got you. Sit back and Relax.',
+                    description:
+                        'Worried about the event management? Don’t worry! we have got you. Sit back and Relax.',
                   ),
                   ServiceCard(
                     imageUrl: videographyImage,
                     heading: 'PHOTO /\nVIDEOGRAPHY',
-                    description: 'We have got photo / videographers who are professional in this field.',
+                    description:
+                        'We have got photo / videographers who are professional in this field.',
                   ),
                 ],
               ),

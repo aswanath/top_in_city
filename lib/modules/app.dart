@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:top_in_city/core/asset_constants.dart';
 import 'package:top_in_city/modules/core/core_screen.dart';
 import 'package:top_in_city/modules/core/presentation/bloc/core_bloc.dart';
 import 'package:top_in_city/modules/core/theme/light_theme.dart';
@@ -22,4 +23,12 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+
+void preCacheImages(BuildContext context){
+  precacheImage(const AssetImage(topInCityLogo), context);
+  precacheImage(const AssetImage(videographyImage), context);
+  precacheImage(const AssetImage(eventManagementImage), context);
+  precacheImage(const AssetImage(cateringServiceImage), context);
 }
