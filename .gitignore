@@ -31,7 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/lib/key/
+/lib/key/google_sheets_keys.dart
+lib/key/
 
 # Web related
 

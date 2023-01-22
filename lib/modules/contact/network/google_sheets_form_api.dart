@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:gsheets/gsheets.dart';
-import 'package:top_in_city/key/google_sheets_keys.dart';
+import 'package:top_in_city/key/google_sheets_key.dart';
 
 class GoogleSheetsFormApi {
   static const _spreadSheetId = "1txNu0Z4pqaWnNvTLUE2sBSuWWd5aQk4gG9l6pu8GD-g";
