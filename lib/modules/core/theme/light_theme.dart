@@ -29,7 +29,7 @@ final lightTheme = ThemeData(
     ),
     headlineMedium: const TextStyle(
       fontFamily: josefinSans,
-      fontWeight: FontWeight.w100,
+      fontWeight: FontWeight.w600,
       color: Colors.black,
       fontSize: 22,
     ),
@@ -45,7 +45,7 @@ final lightTheme = ThemeData(
     ),
     titleMedium: const TextStyle(
       fontFamily: josefinSans,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w600,
       fontSize: 18,
     ),
     bodyMedium: const TextStyle(
