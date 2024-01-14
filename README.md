@@ -1,16 +1,11 @@
-# top_in_city
+# Top In City - Catering And Event Management
 
-A new Flutter project.
+## A Catering Service website to list menu and contact. This is created for my father as he is running a catering service. 
 
-## Getting Started
+Technologies used:
+- Flutter ❤️
+- Google Sheets (Acts as Backend) ❤️
 
-This project is a starting point for a Flutter application.
+It is 100% responsive to any screen sizes and added different layout for mobile and web displays.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### >>>[Top In City](https://aswanath.github.io/top_in_city/)<<<
